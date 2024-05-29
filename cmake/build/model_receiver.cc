@@ -186,10 +186,18 @@ void RequestModelAndInteger() {
         // "192.168.137.231:8080", // batuhan
         // "192.168.137.213:8080", // yunus
         // "192.168.137.29:8080" // tugay
-        "192.168.1.108:8080", // alierdem
-        "192.168.1.110:8080", // batuhan
-        "192.168.1.114:8080", // yunus
-        "192.168.1.107:8080" // tugay
+        // "192.168.1.108:8080", // alierdem
+        // "192.168.1.110:8080", // batuhan
+        // "192.168.1.114:8080", // yunus
+        // "192.168.1.107:8080" // tugay
+        "192.168.137.26:8080",
+        "192.168.137.50:8080",
+        "192.168.137.46:8080",
+        "192.168.137.222:8080"
+  // String ipA1 = '192.168.137.26'; //batuhan
+  // String ipA2 = '192.168.137.50'; //yunus
+  // String ipA3 = '192.168.137.46'; //ali erdem
+  // String ipA4 = '192.168.137.222'; //tugay
     };
 
     for (int i = 0; i < 4; ++i) {
@@ -256,10 +264,10 @@ int main() {
 
     // RequestModelAndInteger();
     while (1) {
+        RequestModelAndInteger();
         std::cout << "Waiting for 5 minutes...\n";
         std::this_thread::sleep_for(std::chrono::minutes(5));
         std::cout << "Time is up. Requesting models...\n";
-        RequestModelAndInteger();
     }
 
     server_thread.join();
