@@ -20,11 +20,12 @@ There needs to be a model file named `model_scripted.pt.` This cannot be uploade
 
 ## Compilation
 
-In `model_receiver.cc`, there are 4 IP addresses. You need to change these to the IP addresses of the Raspberry Pi's running the receiver program. Then compile with:
+In `model_receiver.cc`, there are 4 IP addresses. You need to change these to the IP addresses of the Raspberry Pi's running the `receiver` program. Then compile with:
 ```bash
 make -j 4
 bash compile.sh
 ```
+
 This command will probably not work because you need to regenerate the CMake files. To do so:
 1. Delete the contents of the build directory except for `receiver.cc`, `main.cpp`, and `compile.sh`.
 2. Inside the `build` directory, run:
@@ -37,4 +38,11 @@ After running the above command, run the previous two commands again:
 ```bash
 make -j 4
 bash compile.sh
+```
+
+## Running the program
+
+Make sure all the devices with the IP addresses in the code are running the `receiver` program. Then run the program via the command:
+```bash
+./model_receiver
 ```
