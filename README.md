@@ -27,7 +27,7 @@ bash compile.sh
 ```
 
 This command will probably not work because you need to regenerate the CMake files. To do so:
-1. Delete the contents of the build directory except for `receiver.cc`, `main.cpp`, and `compile.sh`.
+1. Delete the contents of the build directory except for `model_receiver.cc`, `main.cpp`, and `compile.sh`.
 2. Inside the `build` directory, run:
 ```bash
 cmake -DCMAKE_PREFIX_PATH=$MY_INSTALL_DIR ../..
