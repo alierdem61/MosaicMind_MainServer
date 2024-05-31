@@ -13,20 +13,17 @@ message TextResponse {
   string output_text = 1;
 }
 
-// New message for sending the model file chunk
 message ModelChunk {
   bytes chunk_data = 1;
 }
 
-// Message for sending an integer value
 message IntValue {
   int32 value = 1;
 }
 
-service YourService {
+service Mosaic {
   rpc ProcessImageAndText(ImageAndTextRequest) returns (TextResponse) {}
   
-  // New streaming RPC method for sending the model file
   rpc SendModelStream(google.protobuf.Empty) returns (stream ModelChunk) {}
   rpc TrainModel(ImageAndTextRequest) returns (TextResponse) {}
   rpc SendIntValue(google.protobuf.Empty) returns (IntValue) {}

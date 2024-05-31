@@ -32,15 +32,15 @@ using grpc::CreateChannel;
 using grpc::InsecureChannelCredentials;
 using mosaic::ImageAndTextRequest;
 using mosaic::TextResponse;
-using mosaic::YourService;
+using mosaic::Mosaic;
 using mosaic::ModelChunk;
 using mosaic::IntValue;
 using google::protobuf::Empty;
 
-class YourServiceClient {
+class MosaicClient {
 public:
-    YourServiceClient(std::shared_ptr<Channel> channel)
-        : stub_(YourService::NewStub(channel)) {}
+    MosaicClient(std::shared_ptr<Channel> channel)
+        : stub_(Mosaic::NewStub(channel)) {}
 
     int ReceiveIntValue() {
         Empty request;
@@ -112,10 +112,10 @@ public:
     }
 
 private:
-    std::unique_ptr<YourService::Stub> stub_;
+    std::unique_ptr<Mosaic::Stub> stub_;
 };
 
-class YourServiceImpl final : public YourService::Service {
+class MosaicImpl final : public Mosaic::Service {
 public:
     Status SendModelStream(ServerContext* context, const Empty* request, grpc::ServerWriter<ModelChunk>* writer) override {
         std::ifstream model_file("model_scripted.pt", std::ios::binary);
@@ -190,10 +190,10 @@ void RequestModelAndInteger() {
         // "192.168.1.110:8080", // batuhan
         // "192.168.1.114:8080", // yunus
         // "192.168.1.107:8080" // tugay
-        "192.168.137.26:8080",
         "192.168.137.50:8080",
-        "192.168.137.46:8080",
         "192.168.137.222:8080"
+        "192.168.137.26:8080",
+        "192.168.137.46:8080",
   // String ipA1 = '192.168.137.26'; //batuhan
   // String ipA2 = '192.168.137.50'; //yunus
   // String ipA3 = '192.168.137.46'; //ali erdem
@@ -202,7 +202,7 @@ void RequestModelAndInteger() {
 
     for (int i = 0; i < 4; ++i) {
         std::string address = addresses[i];
-        YourServiceClient client(grpc::CreateChannel(address, grpc::InsecureChannelCredentials()));
+        MosaicClient client(grpc::CreateChannel(address, grpc::InsecureChannelCredentials()));
 
         int integer_value = client.ReceiveIntValue();
         std::cout << "Received integer: " << integer_value << std::endl;
@@ -231,7 +231,7 @@ void RequestModelAndInteger() {
 
     for (int i = 0; i < 4; ++i) {
         std::string address = addresses[i];
-        YourServiceClient client(grpc::CreateChannel(address, grpc::InsecureChannelCredentials()));
+        MosaicClient client(grpc::CreateChannel(address, grpc::InsecureChannelCredentials()));
         // std::string model_name = "model" + std::to_string(i + 1) + ".pt";
         std::string model_name = "model_scripted.pt";
         client.SendModel(model_name);
@@ -239,12 +239,12 @@ void RequestModelAndInteger() {
     }
     std::cout << "Sent new model to all Raspberry Pi's" << std::endl;
     // Send the model back
-    // YourServiceClient client(grpc::CreateChannel("192.168.249.30:8080", grpc::InsecureChannelCredentials()));
+    // MosaicClient client(grpc::CreateChannel("192.168.249.30:8080", grpc::InsecureChannelCredentials()));
     // client.SendModel("model_to_send.pt");
 }
 
 void RunServer(const std::string& server_address) {
-    YourServiceImpl service;
+    MosaicImpl service;
     ServerBuilder builder;
 
     builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
