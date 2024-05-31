@@ -33,7 +33,7 @@ There needs to be a model file named `model_scripted.pt.` This cannot be uploade
 
 ## Compilation
 
-In `model_receiver.cc`, there are 4 IP addresses. You need to change these to the IP addresses of the Raspberry Pi's running the `receiver` program. Then inside `cmake/build`, compile with:
+In `model_receiver.cc`, there are 4 IP addresses (at line 184 in the `std::vector` named `addresses`). You need to change these to the IP addresses of the Raspberry Pi's running the `receiver` program. Then inside `cmake/build`, compile with:
 ```bash
 make -j 4
 ```
