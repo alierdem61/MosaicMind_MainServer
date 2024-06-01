@@ -29,7 +29,8 @@ If you get any, compilation errors will be output to a file named `err.txt`.
 
 ## Model File
 
-There needs to be a model file named `model_scripted.pt.` This cannot be uploaded to GitHub due to its size. You can request this file by opening an issue on the GitHub page.
+There needs to be a model file named `model_scripted.pt`. This cannot be uploaded to GitHub due to its size. You can download this file [from here](https://drive.google.com/drive/folders/1wNT5VdHWdcsYvGWe4A7uxwNhLR30y61z).
+This file needs the be in the `cmake/build` directory.
 
 ## Compilation
 
